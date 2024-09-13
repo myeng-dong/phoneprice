@@ -5,6 +5,7 @@
  * @format
  */
 
+import MaskedView from '@react-native-masked-view/masked-view';
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -16,6 +17,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {TextInput} from 'react-native-paper';
 
 import {
   Colors,
@@ -63,35 +65,34 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={[backgroundStyle, {backgroundColor: '#fff', flex: 1}]}>
+      <MaskedView
+        style={{flex: 1, flexDirection: 'row'}}
+        maskElement={
+          <View
+            style={{
+              // Transparent background because mask is based off alpha channel.
+              backgroundColor: 'transparent',
+              flex: 1,
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 40,
+                color: 'black',
+                fontWeight: 'bold',
+              }}>
+              휴대폰 가격 계산기
+            </Text>
+          </View>
+        }>
+        {/* Shows behind the mask, you can put anything here, such as an image */}
+        <View style={{flex: 1, height: '100%', backgroundColor: '#324376'}} />
+        <View style={{flex: 1, height: '100%', backgroundColor: '#222'}} />
+        <View style={{flex: 1, height: '100%', backgroundColor: '#000'}} />
+        <View style={{flex: 1, height: '100%', backgroundColor: '#E5E5E5'}} />
+      </MaskedView>
+      <TextInput />
     </SafeAreaView>
   );
 }
